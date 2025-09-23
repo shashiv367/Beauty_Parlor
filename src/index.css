@@ -1,0 +1,126 @@
+@import "tailwindcss";
+
+:root {
+  /* Deep burgundy theme - #6B2C4B */
+  --background: 328 42% 30%;   /* #6B2C4B background */
+  --foreground: 0 0% 100%;     /* white text */
+  --card: 328 38% 35%;         /* slightly lighter panel */
+  --card-foreground: 0 0% 100%; /* white text */
+  --popover: 328 42% 30%;
+  --popover-foreground: 0 0% 100%; /* white text */
+  /* Grey accent */
+  --primary: 0 0% 80%;         /* light grey for accents on plum */
+  --primary-foreground: 0 0% 100%; /* white text */
+  --secondary: 0 0% 60%;       /* medium grey */
+  --secondary-foreground: 0 0% 100%; /* white text */
+  --muted: 328 35% 40%;
+  --muted-foreground: 0 0% 100%; /* white text */
+  --accent: 0 0% 70%;
+  --accent-foreground: 0 0% 100%; /* white text */
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 100%; /* white text */
+  --border: 328 35% 45%;
+  --input: 328 35% 45%;
+  --ring: 0 0% 80%;
+  --radius: 0.5rem;
+
+  /* Aesthetic gradient system */
+  --gradient-start: 328 42% 28%;
+  --gradient-via: 328 38% 33%;
+  --gradient-end: 328 55% 40%;
+}
+
+.dark {
+  /* keep same palette for dark mode to ensure consistency */
+  --background: 328 42% 30%;
+  --foreground: 0 0% 100%;
+  --card: 328 38% 35%;
+  --card-foreground: 0 0% 100%;
+  --popover: 328 42% 30%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 328 65% 45%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 328 35% 40%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 328 35% 40%;
+  --muted-foreground: 0 0% 100%;
+  --accent: 328 35% 40%;
+  --accent-foreground: 0 0% 100%;
+  --destructive: 0 62% 31%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 328 35% 45%;
+  --input: 328 35% 45%;
+  --ring: 328 65% 45%;
+}
+
+* {
+  border-color: hsl(var(--border));
+}
+
+body {
+  background:
+    radial-gradient(900px 600px at 10% 0%, hsl(var(--gradient-end) / 0.35), transparent 60%),
+    radial-gradient(800px 600px at 90% 10%, hsl(var(--primary) / 0.25), transparent 60%),
+    linear-gradient(135deg, hsl(var(--gradient-start)), hsl(var(--gradient-end)));
+  color: hsl(var(--foreground));
+}
+
+/* Glassmorphism helper for translucent panels */
+.glass-card {
+  background-color: hsl(var(--card) / 0.6);
+  border: 1px solid hsl(var(--border) / 0.5);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Subtle dotted pattern overlay */
+.pattern-soft {
+  background-image:
+    radial-gradient(hsl(var(--foreground) / 0.06) 1px, transparent 1px);
+  background-size: 18px 18px;
+}
+
+/* Animated gradient utility */
+.animated-gradient {
+  background-image: linear-gradient(120deg,
+    hsl(var(--gradient-start)) 0%,
+    hsl(var(--gradient-via)) 50%,
+    hsl(var(--gradient-end)) 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 14s ease-in-out infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Card hover lift */
+.lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 35px hsl(var(--primary) / 0.18);
+}
+.lift {
+  transition: transform 250ms ease, box-shadow 300ms ease;
+}
+
+/* Button shine on hover */
+.shine {
+  position: relative;
+  overflow: hidden;
+}
+.shine::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  transform: rotate(25deg);
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transition: transform 600ms ease;
+}
+.shine:hover::after {
+  transform: translateX(300%) rotate(25deg);
+}
