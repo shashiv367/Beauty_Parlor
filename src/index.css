@@ -1,56 +1,55 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700;800&display=swap');
 
 :root {
-  /* Deep burgundy theme - #6B2C4B */
-  --background: 328 42% 30%;   /* #6B2C4B background */
+  /* Purple dashboard theme */
+  --background: 267 55% 16%;   /* deep purple base */
   --foreground: 0 0% 100%;     /* white text */
-  --card: 328 38% 35%;         /* slightly lighter panel */
-  --card-foreground: 0 0% 100%; /* white text */
-  --popover: 328 42% 30%;
-  --popover-foreground: 0 0% 100%; /* white text */
-  /* Grey accent */
-  --primary: 0 0% 80%;         /* light grey for accents on plum */
-  --primary-foreground: 0 0% 100%; /* white text */
-  --secondary: 0 0% 60%;       /* medium grey */
-  --secondary-foreground: 0 0% 100%; /* white text */
-  --muted: 328 35% 40%;
-  --muted-foreground: 0 0% 100%; /* white text */
-  --accent: 0 0% 70%;
-  --accent-foreground: 0 0% 100%; /* white text */
+  --card: 266 38% 22%;         /* darker panel */
+  --card-foreground: 0 0% 100%;
+  --popover: 267 55% 16%;
+  --popover-foreground: 0 0% 100%;
+  --primary: 266 85% 62%;      /* vivid purple accent */
+  --primary-foreground: 0 0% 100%;
+  --secondary: 268 35% 36%;    /* muted purple */
+  --secondary-foreground: 0 0% 100%;
+  --muted: 267 30% 28%;
+  --muted-foreground: 0 0% 92%;
+  --accent: 268 45% 45%;
+  --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
-  --destructive-foreground: 0 0% 100%; /* white text */
-  --border: 328 35% 45%;
-  --input: 328 35% 45%;
-  --ring: 0 0% 80%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 267 28% 32%;
+  --input: 267 28% 32%;
+  --ring: 266 85% 62%;
   --radius: 0.5rem;
 
-  /* Aesthetic gradient system */
-  --gradient-start: 328 42% 28%;
-  --gradient-via: 328 38% 33%;
-  --gradient-end: 328 55% 40%;
+  /* Gradient system tuned to purple */
+  --gradient-start: 267 55% 16%;
+  --gradient-via: 266 45% 30%;
+  --gradient-end: 266 55% 40%;
 }
 
 .dark {
-  /* keep same palette for dark mode to ensure consistency */
-  --background: 328 42% 30%;
+  --background: 267 55% 12%;
   --foreground: 0 0% 100%;
-  --card: 328 38% 35%;
+  --card: 266 38% 20%;
   --card-foreground: 0 0% 100%;
-  --popover: 328 42% 30%;
+  --popover: 267 55% 12%;
   --popover-foreground: 0 0% 100%;
-  --primary: 328 65% 45%;
+  --primary: 266 85% 62%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 328 35% 40%;
+  --secondary: 268 35% 30%;
   --secondary-foreground: 0 0% 100%;
-  --muted: 328 35% 40%;
-  --muted-foreground: 0 0% 100%;
-  --accent: 328 35% 40%;
+  --muted: 267 30% 24%;
+  --muted-foreground: 0 0% 92%;
+  --accent: 268 45% 40%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 62% 31%;
   --destructive-foreground: 0 0% 100%;
-  --border: 328 35% 45%;
-  --input: 328 35% 45%;
-  --ring: 328 65% 45%;
+  --border: 267 28% 28%;
+  --input: 267 28% 28%;
+  --ring: 266 85% 62%;
 }
 
 * {
@@ -67,10 +66,11 @@ body {
 
 /* Glassmorphism helper for translucent panels */
 .glass-card {
-  background-color: hsl(var(--card) / 0.6);
-  border: 1px solid hsl(var(--border) / 0.5);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  /* Lighter, more transparent look */
+  background-color: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
 }
 
 /* Subtle dotted pattern overlay */
@@ -88,6 +88,11 @@ body {
     hsl(var(--gradient-end)) 100%);
   background-size: 200% 200%;
   animation: gradientShift 14s ease-in-out infinite;
+}
+
+/* Brand heading font */
+.brand-heading {
+  font-family: 'Playfair Display', serif;
 }
 
 @keyframes gradientShift {

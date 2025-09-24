@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import heroBg from '../../assets/bg.png'
-import beImg from '../../assets/be.png'
+import React from 'react'
+import bbbImg from '../../assets/bbb.png'
 import { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
@@ -8,32 +7,34 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui
 const Home = () => {
   return (
     <div className="min-h-screen">
-      {/* Hero Section */}
+      {/* Hero Section - Full Bleed Background Template */}
       <section
-        className="py-24 text-[hsl(var(--foreground))] relative bg-center bg-cover"
-        style={{ backgroundImage: `url(${heroBg})` }}
+        className="relative min-h-[92vh] flex items-center"
+        style={{ backgroundImage: `url(${bbbImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }}
       >
-        <div className="absolute inset-0 bg-[hsl(var(--background))]/55" />
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-7xl font-bold mb-6">
-              Welcome to <span className="text-[hsl(var(--primary))]">Sweety's Beauty Spot</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-white mb-8 max-w-3xl mx-auto">
-              Your premier destination for professional beauty services. We specialize in making you look and feel your absolute best.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg" className="bg-[hsl(var(--primary))] hover:opacity-90 text-[hsl(var(--primary-foreground))]">
-                <Link to="/services">
-                  View Our Services
-                </Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="border-2 border-[hsl(var(--primary))] text-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))] hover:text-[hsl(var(--primary-foreground))]">
-                <Link to="/contact">
-                  Book Appointment
-                </Link>
-              </Button>
+        {/* Dark vignette overlay for readability */}
+        <div className="absolute inset-0 bg-[rgba(0,0,0,0.45)]" />
+
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 items-center gap-6">
+            <div className="text-left">
+              <h1 className="text-white/40 text-5xl md:text-6xl font-bold tracking-wide leading-tight">SELF-CARE IS</h1>
             </div>
+            <div className="text-left lg:text-right lg:justify-self-end transform lg:translate-x-16">
+              <h1 className="text-white/40 text-5xl md:text-6xl font-bold tracking-wide leading-tight">IMPORTANT.</h1>
+            </div>
+          </div>
+          <p className="mt-6 text-white/85 text-lg md:text-xl max-w-2xl">
+          All you need is one expert—for skin, hair, and makeup that feels like you.
+          </p>
+          {/* CTA moved to bottom-left box */}
+        </div>
+        {/* Bottom-left CTA box */}
+        <div className="absolute left-24 bottom-6 z-10">
+          <div className="bg-[hsl(var(--primary))]/30 backdrop-blur-md border border-[hsl(var(--primary))]/40 rounded-3xl shadow-lg p-4 w-[260px]">
+            <Button asChild size="lg" className="w-full bg-[hsl(var(--primary))] hover:bg-[hsl(var(--primary))]/90 text-white rounded-2xl font-semibold">
+              <Link to="/contact" className="block w-full text-center">BOOK YOUR APPOINTMENT!</Link>
+            </Button>
           </div>
         </div>
       </section>
@@ -43,10 +44,10 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Our Services
+              Services
             </h2>
             <p className="text-xl text-white max-w-2xl mx-auto">
-              Professional beauty treatments designed to enhance your natural beauty and boost your confidence.
+              Professional beauty services designed to enhance your natural beauty and boost your confidence.
             </p>
           </div>
           
@@ -58,7 +59,7 @@ const Home = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
                 </div>
-                <CardTitle>Makeup Artistry</CardTitle>
+                <CardTitle>Skin</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
@@ -74,7 +75,7 @@ const Home = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                   </svg>
                 </div>
-                <CardTitle>Skincare Treatments</CardTitle>
+                <CardTitle>Hair</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
@@ -90,11 +91,11 @@ const Home = () => {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <CardTitle>Bridal Packages</CardTitle>
+                <CardTitle>Makeup & Bridal Packages</CardTitle>
               </CardHeader>
               <CardContent>
                 <CardDescription>
-                  Complete bridal beauty packages including trial sessions, day-of services, and bridal party styling.
+                Professional makeup services for special occasions, weddings and Complete bridal beauty packages including bridal party styling.
                 </CardDescription>
               </CardContent>
             </Card>
@@ -189,18 +190,18 @@ const Home = () => {
               </p>
               <div className="grid grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[hsl(var(--primary))]">5+</div>
+                  <div className="text-3xl font-bold text-[hsl(var(--primary))]">10+</div>
                   <div className="text-white">Years Experience</div>
                 </div>
                 <div className="text-center">
-                  <div className="text-3xl font-bold text-[hsl(var(--primary))]">500+</div>
+                  <div className="text-3xl font-bold text-[hsl(var(--primary))]">1000+</div>
                   <div className="text-white">Happy Clients</div>
                 </div>
               </div>
             </div>
             <div className="glass-card p-8 rounded-xl shadow-lg">
               <div className="aspect-square rounded-lg overflow-hidden">
-                <img src={beImg} alt="Professional Beauty Services" className="w-full h-full object-cover" />
+                <img src={bbbImg} alt="Professional Beauty Services" className="w-full h-full object-cover" />
               </div>
               <div className="text-center mt-4">
                 <p>Professional Beauty Services</p>

@@ -4,35 +4,40 @@ import { Button } from '../ui/button'
 
 function Header() {
   return (
-    <header className="sticky top-0 z-50 text-[hsl(var(--foreground))] bg-transparent shadow-none">
+    <header className="fixed top-0 left-0 right-0 z-50 text-white bg-transparent">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-1">
+        <div className="flex justify-between items-center py-6">
           {/* Brand Name */}
           <Link to="/" className="flex items-center">
-            <h1 className="text-2xl font-bold text-[hsl(var(--foreground))]">
-              Sweety's Beauty Spot
-            </h1>
+            <div className="leading-tight text-center">
+              <h1 className="brand-heading text-3xl sm:text-4xl font-extrabold text-white">
+                Sweety's Beauty Spot
+              </h1>
+              <p className="text-[10px] sm:text-xs uppercase tracking-widest text-white/80">
+                Skin | Hair | Makeup
+              </p>
+            </div>
           </Link>
           
           {/* Navigation */}
-          <nav className="hidden md:flex space-x-8">
+          <nav className="hidden md:flex space-x-8 ml-auto">
             <Link 
               to="/" 
-              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium"
+              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"
             >
-              Home
+              About
             </Link>
             <Link 
               to="/services" 
-              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium"
+              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"
             >
               Services
             </Link>
             <Link 
               to="/contact" 
-              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium"
+              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"
             >
-              Contact
+              Contact me
             </Link>
           </nav>
           
