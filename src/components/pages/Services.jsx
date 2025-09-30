@@ -170,7 +170,7 @@ const Services = () => {
           <div className="bg-[hsl(var(--primary))] text-white p-8 rounded-xl">
             <h3 className="text-2xl font-bold mb-4">Contact Us Today</h3>
             <p className="text-white/90 mb-6">
-              Call us at (555) 123-4567 or visit our contact page to book your appointment.
+              Call us at 9100350293 or visit our contact page to book your appointment in Kukatpally.
             </p>
             <button className="bg-white text-[hsl(var(--primary))] hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors duration-200 shine">
               Book Appointment

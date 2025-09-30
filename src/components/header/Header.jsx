@@ -1,12 +1,41 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
 
 function Header() {
+  const [isVisible, setIsVisible] = useState(true)
+  const lastScrollY = useRef(0)
+
+  useEffect(() => {
+    const onScroll = () => {
+      const y = window.scrollY || window.pageYOffset
+      const isScrollingDown = y > lastScrollY.current
+      const crossed = y > 80
+      if (isScrollingDown && crossed) {
+        setIsVisible(false)
+      } else {
+        setIsVisible(true)
+      }
+      lastScrollY.current = y
+    }
+
+    const onMouseMove = (e) => {
+      if (e.clientY < 90) {
+        setIsVisible(true)
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('mousemove', onMouseMove)
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      window.removeEventListener('mousemove', onMouseMove)
+    }
+  }, [])
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 text-white bg-transparent">
+    <header className={`fixed top-0 left-0 right-0 z-50 text-white bg-transparent transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0 pointer-events-none'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-6">
+        <div className="relative flex justify-between items-center py-6">
           {/* Brand Name */}
           <Link to="/" className="flex items-center">
             <div className="leading-tight text-center">
@@ -19,8 +48,8 @@ function Header() {
             </div>
           </Link>
           
-          {/* Navigation */}
-          <nav className="hidden md:flex space-x-8 ml-auto">
+          {/* Navigation - centered */}
+          <nav className="hidden md:flex space-x-8 absolute left-[52%] -translate-x-1/2">
             <Link 
               to="/" 
               className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"

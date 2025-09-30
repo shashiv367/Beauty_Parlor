@@ -10,6 +10,7 @@ const Contact = () => {
     name: '',
     email: '',
     phone: '',
+    address: '',
     service: '',
     date: '',
     message: ''
@@ -24,8 +25,20 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    alert('Thank you for your booking request! We will contact you soon.')
+    const whatsappNumber = '919100350293' // country code + number
+    const lines = [
+      `New Booking Request`,
+      `Name: ${formData.name}`,
+      `Email: ${formData.email}`,
+      `Phone: ${formData.phone}`,
+      `Address: ${formData.address || 'N/A'}`,
+      `Service: ${formData.service}`,
+      `Preferred Date: ${formData.date || 'N/A'}`,
+      `Message: ${formData.message || 'N/A'}`,
+    ]
+    const text = encodeURIComponent(lines.join('\n'))
+    const url = `https://wa.me/${whatsappNumber}?text=${text}`
+    window.open(url, '_blank')
   }
 
   return (
@@ -59,7 +72,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">Phone</h3>
-                    <p className="text-white">(555) 123-4567</p>
+                    <p className="text-white">9100350293</p>
                     <p className="text-white text-sm">Mon-Sun: 9:00 AM - 8:00 PM</p>
                   </div>
                 </div>
@@ -86,7 +99,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="text-xl font-semibold text-white mb-2">Location</h3>
-                    <p className="text-white">123 Beauty Lane<br />Suite 100<br />Beauty City, BC 12345</p>
+                    <p className="text-white">Kukatpally</p>
                     <p className="text-white text-sm">Free parking available</p>
                   </div>
                 </div>
@@ -177,6 +190,17 @@ const Contact = () => {
                       placeholder="(555) 123-4567"
                     />
                   </div>
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="address">Address</Label>
+                  <Input
+                    id="address"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleChange}
+                    placeholder="Street, City, State, ZIP"
+                  />
                 </div>
 
                 <div className="grid md:grid-cols-2 gap-6">
