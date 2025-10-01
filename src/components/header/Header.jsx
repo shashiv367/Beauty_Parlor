@@ -54,6 +54,18 @@ function Header() {
               to="/" 
               className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"
             >
+              Home
+            </Link>
+            <Link 
+              to="/#about" 
+              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"
+              onClick={(e) => {
+                if (window.location.pathname === '/') {
+                  e.preventDefault()
+                  document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+            >
               About
             </Link>
             <Link 
@@ -63,10 +75,16 @@ function Header() {
               Services
             </Link>
             <Link 
+              to="/gallery" 
+              className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"
+            >
+              Gallery
+            </Link>
+            <Link 
               to="/contact" 
               className="text-white hover:text-[hsl(var(--primary))] transition-colors duration-200 font-medium uppercase tracking-wide text-sm"
             >
-              Contact me
+              Contact Me
             </Link>
           </nav>
           

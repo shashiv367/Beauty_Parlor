@@ -1,6 +1,7 @@
 import React from 'react'
 import bbbImg from '../../assets/bbb.png'
 import beImg from '../../assets/be.png'
+import bg2 from '../background/bg4.mp4'
 import { Link } from 'react-router-dom'
 import { Button } from '../ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../ui/card'
@@ -13,7 +14,8 @@ const Home = () => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
           entry.target.classList.add('in-view')
-          observer.unobserve(entry.target)
+        } else {
+          entry.target.classList.remove('in-view')
         }
       })
     }, { threshold: 0.25 })
@@ -25,6 +27,19 @@ const Home = () => {
     })
 
     return () => observer.disconnect()
+  }, [])
+
+  // Scroll to section if hash is present in URL
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash === '#about') {
+      setTimeout(() => {
+        const element = document.getElementById('about')
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        }
+      }, 100)
+    }
   }, [])
   return (
     <div className="min-h-screen">
@@ -57,94 +72,129 @@ const Home = () => {
       </section>
 
       {/* Services Preview Section */}
-      <section className="relative py-20 animated-gradient pattern-soft text-[hsl(var(--card-foreground))]" id="services">
-        {/* Decorative beautician item icons (brush, compact, lipstick) */}
-        <div className="pointer-events-none absolute inset-0">
-          {/* Lipstick */}
-          <svg className="decor-icon decor-delay-1 absolute top-28 -left-1 w-7 h-7 text-[hsl(var(--primary))]/70" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M7 11h10v9a2 2 0 01-2 2H9a2 2 0 01-2-2v-9z"/>
-            <path d="M11 2.5c0-.83.67-1.5 1.5-1.5S14 1.67 14 2.5V11h-3V2.5z"/>
-          </svg>
-          {/* Powder compact disc */}
-          <svg className="decor-icon decor-delay-2 absolute bottom-8 left-16 w-9 h-9 text-white/30" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <circle cx="12" cy="9" r="7"/>
-            <rect x="4" y="18" width="16" height="3" rx="1.5"/>
-          </svg>
-          {/* Scissors */}
-          <svg className="decor-icon decor-delay-3 absolute bottom-24 right-24 w-7 h-7 text-[hsl(var(--primary))]/60" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M9 12a3 3 0 11-3-3 3 3 0 013 3zm9 3a3 3 0 10-3-3 3 3 0 003 3z"/>
-            <path d="M7.2 10.8L20 4l-1-2-13 7 1.2 1.8zM9 13l4 6 2-1-4-6-2 1z"/>
-          </svg>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+      <section className="relative py-20 overflow-hidden text-[hsl(var(--card-foreground))]" id="services">
+        {/* Video Background */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src={bg2} type="video/mp4" />
+        </video>
+        
+        {/* Dark overlay for better readability */}
+        <div className="absolute inset-0 bg-black/40" />
+        
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    {/* Styled Services Heading */}
+    <div className="relative flex items-center justify-center mb-8 overflow-hidden min-h-[200px]">
+      {/* Big outlined background text */}
+      <h1 className="absolute text-[6rem] md:text-[10rem] lg:text-[12rem] font-bold text-transparent stroke-text uppercase tracking-tight whitespace-nowrap">
+        Services
+      </h1>
+
+      {/* Foreground gradient text */}
+      <h2 className="relative text-4xl md:text-5xl lg:text-6xl font-bold bg-gradient-to-r from-[hsl(var(--primary))] via-purple-300 to-pink-200 text-transparent bg-clip-text z-10">
               Services
             </h2>
+    </div>
+    
+    <div className="text-center mb-16">
             <p className="text-xl text-white max-w-2xl mx-auto">
               Professional beauty services designed to enhance your natural beauty and boost your confidence.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-8" id="services-grid">
-            <Card className="glass-card lift text-center transition-shadow duration-200 reveal-card">
-              <CardHeader>
-                <div className="w-16 h-16 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+    {/* Roadmap Layout */}
+    <div className="relative max-w-4xl mx-auto" id="services-roadmap">
+      {/* Center Line */}
+      <div className="absolute left-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-[hsl(var(--primary))]/60 via-[hsl(var(--primary))] to-[hsl(var(--primary))]/60 -translate-x-1/2 hidden md:block" />
+
+          {/* Roadmap Item 1 - Left */}
+          <div className="relative flex items-center mb-16 md:mb-8">
+            <div className="w-full md:w-7/12 md:pl-20">
+            <Card className="glass-card lift text-center opacity-0 reveal-card min-h-[180px] flex flex-col rounded-sm">
+             <CardHeader className="flex-grow">
+               <div className="w-14 h-14 bg-[hsl(var(--primary))] rounded-sm flex items-center justify-center mx-auto mb-4">
+                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                   </svg>
                 </div>
-                <CardTitle>Skin</CardTitle>
+               <CardTitle className="text-2xl mb-4">Skin</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription>
+             <CardContent className="pb-3">
+               <CardDescription className="text-base leading-relaxed">
                   Professional makeup services for special occasions, weddings, and everyday beauty enhancement.
                 </CardDescription>
               </CardContent>
             </Card>
-            
-            <Card className="glass-card lift text-center transition-shadow duration-200 reveal-card">
-              <CardHeader>
-                <div className="w-16 h-16 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        </div>
+        {/* Center Node */}
+        <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-[hsl(var(--primary))] rounded-full border-4 border-[hsl(var(--background))] shadow-lg hidden md:block z-10" />
+        <div className="w-full md:w-5/12"></div>
+      </div>
+      
+      {/* Roadmap Item 2 - Right */}
+<div className="relative flex items-center mb-16 md:mb-8">
+  <div className="w-full md:w-5/12"></div>
+  {/* Center Node */}
+  <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-[hsl(var(--primary))] rounded-full border-4 border-[hsl(var(--background))] shadow-lg hidden md:block z-20" />
+  
+  {/* Hair Card */}
+  <div className="w-full md:w-7/12 md:pl-2 md:pr-5">   {/* ⬅️ Changed from md:pl-70 to md:pl-20 */}
+     <Card className="glass-card lift text-center opacity-0 reveal-card min-h-[180px] flex flex-col rounded-sm">
+       <CardHeader className="flex-grow">
+         <div className="w-14 h-14 bg-[hsl(var(--primary))] rounded-sm flex items-center justify-center mx-auto mb-4">
+           <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                   </svg>
                 </div>
-                <CardTitle>Hair</CardTitle>
+         <CardTitle className="text-2xl mb-4">Hair</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription>
+       <CardContent className="pb-3">
+         <CardDescription className="text-base leading-relaxed">
                   Rejuvenating facial treatments and skincare routines tailored to your skin type and concerns.
                 </CardDescription>
               </CardContent>
             </Card>
-            
-            <Card className="glass-card lift text-center transition-shadow duration-200 reveal-card">
-              <CardHeader>
-                <div className="w-16 h-16 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center mx-auto mb-6">
-                  <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+  </div>
+</div>
+
+
+      {/* Roadmap Item 3 - Left */}
+      <div className="relative flex items-center mb-8">
+        <div className="w-full md:w-7/12 md:pl-12">
+           <Card className="glass-card lift text-center transition-all duration-700 opacity-0 translate-x-[-40px] reveal-card min-h-[180px] flex flex-col rounded-sm">
+             <CardHeader className="flex-grow">
+               <div className="w-14 h-14 bg-[hsl(var(--primary))] rounded-sm flex items-center justify-center mx-auto mb-4">
+                 <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                   </svg>
                 </div>
-                <CardTitle>Makeup & Bridal Packages</CardTitle>
+               <CardTitle className="text-2xl mb-4">Makeup & Bridal Packages</CardTitle>
               </CardHeader>
-              <CardContent>
-                <CardDescription>
-                Professional makeup services for special occasions, weddings and Complete bridal beauty packages including bridal party styling.
+             <CardContent className="pb-3">
+               <CardDescription className="text-base leading-relaxed">
+                Complete bridal beauty packages, professional event makeup, and full styling.
                 </CardDescription>
               </CardContent>
             </Card>
+        </div>
+        <div className="absolute left-1/2 -translate-x-1/2 w-8 h-8 bg-[hsl(var(--primary))] rounded-full border-4 border-[hsl(var(--background))] shadow-lg hidden md:block z-10" />
+        <div className="w-full md:w-5/12"></div>
+      </div>
           </div>
           
           <div className="text-center mt-12">
             <Button asChild size="lg" className="bg-[hsl(var(--primary))] hover:opacity-90 text-[hsl(var(--primary-foreground))] shine">
-              <Link to="/services">
-                Explore All Services
-              </Link>
+        <Link to="/services">Explore All Services</Link>
             </Button>
           </div>
         </div>
       </section>
+
 
       {/* Testimonials Section */}
       <section className="py-20 bg-gradient-to-br from-[hsl(var(--background))] via-[hsl(var(--gradient-via))] to-[hsl(var(--background))] text-[hsl(var(--foreground))]">
@@ -207,20 +257,26 @@ const Home = () => {
       </section>
 
       {/* About Section */}
-      <section className="py-20 text-[hsl(var(--foreground))] bg-gradient-to-br from-[hsl(var(--background))] via-[hsl(var(--gradient-via))] to-[hsl(var(--background))]">
+      <section id="about" className="py-20 text-[hsl(var(--foreground))] bg-gradient-to-br from-[hsl(var(--background))] via-[hsl(var(--gradient-via))] to-[hsl(var(--background))]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
-              <h2 className="brand-heading text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-4">
+              <h2 className="brand-heading text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight mb-2">
                 <span className="text-white/85">About </span>
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-[hsl(var(--primary))]">
                   Sweety's Beauty Spot
                 </span>
               </h2>
+              
+              {/* Your Glow, My Passion - Special Tagline */}
+              <div className="mb-6">
+                <p className="text-2xl md:text-3xl lg:text-4xl font-bold italic bg-clip-text text-transparent bg-gradient-to-r from-[hsl(var(--primary))] via-pink-300 to-purple-300 tracking-wide animate-pulse">
+                  "Your Glow, My Passion"
+                </p>
+              </div>
+              
               <p className="text-lg text-white mb-6">
-                With years of experience in the beauty industry, Sweety's Beauty Spot has been helping clients 
-                enhance their natural beauty and boost their confidence. Our team of certified professionals 
-                uses only the highest quality products and latest techniques.
+              At Sweety’s Beauty Spot, it’s just me bringing my passion and years of experience in beauty care to help you look and feel your absolute best. I believe beauty isn’t about hiding who you are, but celebrating your natural glow. That’s why every treatment I offer is tailored just for you – whether it’s flawless skin, healthy hair, or a refreshing makeover, you’ll always receive my personal touch and full attention.
               </p>
               <p className="text-lg text-white mb-8">
                 We believe that beauty is about feeling confident in your own skin. Our personalized approach 
@@ -242,38 +298,160 @@ const Home = () => {
                 <img src={beImg} alt="Professional Beauty Services" className="w-full h-full object-cover" />
               </div>
               <div className="text-center mt-4">
-                <p>Kukatpally • Call: 9100350293</p>
+                <p>Kukatpally, Hyderabad • Call: +91 9100350293</p>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Call to Action Section */}
-      <section className="relative py-20 text-white overflow-hidden">
-        {/* Gradient background */}
-        <div className="absolute inset-0 bg-gradient-to-br from-[hsl(var(--primary))] via-[hsl(var(--gradient-via))] to-[hsl(var(--background))] opacity-95" />
-        {/* Animated gradient overlay */}
-        <div className="pointer-events-none absolute inset-0 animated-gradient opacity-35 mix-blend-overlay" />
-        {/* Soft radial accents */}
-        <div className="pointer-events-none absolute -top-40 -left-40 w-[520px] h-[520px] rounded-full bg-[hsl(var(--primary))]/35 blur-3xl" />
-        <div className="pointer-events-none absolute -bottom-40 -right-40 w-[560px] h-[560px] rounded-full bg-white/15 blur-3xl" />
-        {/* Extra gradient richness */}
-        <div className="pointer-events-none absolute inset-0 opacity-70 mix-blend-overlay bg-[radial-gradient(800px_400px_at_20%_20%,hsl(var(--gradient-end))_0%,transparent_60%)]" />
-        <div className="pointer-events-none absolute inset-0 opacity-60 mix-blend-soft-light bg-[radial-gradient(700px_360px_at_80%_70%,hsl(var(--primary))_0%,transparent_65%)]" />
-        <div className="pointer-events-none absolute inset-0 opacity-50 bg-[conic-gradient(from_140deg_at_50%_50%,hsl(var(--primary))/0.0_0deg,hsl(var(--primary))/0.25_120deg,hsl(var(--gradient-end))/0.25_240deg,hsl(var(--primary))/0.0_360deg)]" />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Ready to Transform Your Look?
+      {/* Combined CTA & Footer Section */}
+      <footer className="text-[hsl(var(--foreground))] bg-gradient-to-b from-[hsl(var(--gradient-via))] to-[hsl(var(--background))]">
+        {/* CTA Content */}
+        <section className="py-20 bg-gradient-to-br from-[hsl(var(--background))] via-[hsl(var(--gradient-via))] to-[hsl(var(--background))] text-[hsl(var(--card-foreground))]">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold mb-8">
+            Ready to Book Your Service?
           </h2>
-          <p className="text-xl text-white/80 mb-8">
-            Book your appointment today and experience the Sweety's Beauty Spot difference.
-          </p>
-          <Button asChild size="lg" variant="secondary" className="rounded-full px-8 py-6 font-semibold bg-white text-[hsl(var(--primary))] hover:bg-gray-100">
-            <Link to="/contact"></Link>
-          </Button>
+          <div className="grid md:grid-cols-3 gap-8 mb-12">
+            <div className="text-center glass-card p-6 rounded-xl">
+              <div className="w-16 h-16 bg-[hsl(var(--primary))]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-[hsl(var(--primary))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Easy Booking</h3>
+              <p className="text-white/80">Schedule your appointment online or call us directly</p>
+            </div>
+            
+            <div className="text-center glass-card p-6 rounded-xl">
+              <div className="w-16 h-16 bg-[hsl(var(--primary))]/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-[hsl(var(--primary))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Flexible Hours</h3>
+              <p className="text-white/80">Open 7 days a week with extended hours for your convenience</p>
+            </div>
+            
+            <div className="text-center glass-card p-6 rounded-xl">
+              <div className="w-16 h-16 bg-[hsl(var(--primary))]//20 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-[hsl(var(--primary))]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold mb-2">Quality Guarantee</h3>
+              <p className="text-white/80">100% satisfaction guarantee on all our services</p>
+            </div>
+          </div>
+          
+          <div className="bg-[hsl(var(--primary))] text-white p-8 rounded-xl">
+            <h3 className="text-2xl font-bold mb-4">Contact Us Today</h3>
+            <p className="text-white/90 mb-6">
+              Call us at +91 9100350293 or visit our contact page to book your appointment in Kukatpally, Hyderabad.
+            </p>
+            <button className="bg-white text-[hsl(var(--primary))] hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition-colors duration-200 shine">
+              Book Appointment
+            </button>
+          </div>
         </div>
       </section>
+
+        {/* Footer Content */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 pt-12 border-t border-white/10">
+          <div className="grid md:grid-cols-4 gap-5">
+            {/* Brand Name and Description */}
+            <div className="md:col-span-2">
+              <Link to="/" className="flex items-center mb-6">
+                <h2 className="text-2xl font-bold text-[hsl(var(--foreground))]">
+                  Sweety's Beauty Spot
+                </h2>
+              </Link>
+              <p className="text-white/80 mb-6 max-w-md">
+                Your premier destination for professional beauty services. We specialize in making you look and feel your absolute best with our expert team and high-quality treatments.
+              </p>
+              <div className="flex space-x-4">
+                <a href="#" aria-label="Instagram" className="w-10 h-10 bg-[hsl(var(--primary))] rounded-full flex items-center justify-center hover:opacity-90 transition-colors">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor"><path d="M7 2C4.2 2 2 4.2 2 7v10c0 2.8 2.2 5 5 5h10c2.8 0 5-2.2 5-5V7c0-2.8-2.2-5-5-5H7zm10 2c1.7 0 3 1.3 3 3v10c0 1.7-1.3 3-3 3H7c-1.7 0-3-1.3-3-3V7c0-1.7 1.3-3 3-3h10zm-5 3.5A5.5 5.5 0 1017.5 13 5.5 5.5 0 0012 7.5zm0 2A3.5 3.5 0 1115.5 13 3.5 3.5 0 0112 9.5zM18 6.2a1 1 0 11-1-1 1 1 0 011 1z"/></svg>
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links */}
+            <div>
+              <h3 className="text-xl font-semibold mb-6">Quick Links</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link to="/" className="text-white/70 hover:text-white transition-colors">
+                    Home
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/services" className="text-white/70 hover:text-white transition-colors">
+                    Services
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/contact" className="text-white/70 hover:text-white transition-colors">Contact me</Link>
+                </li>
+                <li>
+                  <Link to="/" className="text-white/70 hover:text-white transition-colors">About</Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <h3 className="text-xl font-semibold mb-6">Contact Info</h3>
+              <div className="space-y-4">
+                <div className="flex items-start">
+                  <svg className="w-5 h-5 text-[hsl(var(--primary))] mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <div>
+                    <p className="text-gray-300">Kukatpally, Hyderabad</p>
+                  </div>
+                </div>
+                
+                <div className="flex items-start">
+                  <svg className="w-5 h-5 text-[hsl(var(--primary))] mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                  </svg>
+                  <p className="text-gray-300">+91 9100350293</p>
+                </div>
+                
+                <div className="flex items-start">
+                  <svg className="w-5 h-5 text-[hsl(var(--primary))] mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                  </svg>
+                  <p className="text-gray-300">info@sweetysbeautyspot.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Bar */}
+          <div className="border-t border-white/10 mt-8 pt-6">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="text-white/70 text-xs">
+                © 2024 Sweety's Beauty Spot. All rights reserved.
+              </p>
+              <div className="flex space-x-4 mt-3 md:mt-0">
+                <a href="#" className="text-white/70 hover:text-white text-xs transition-colors">
+                  Privacy Policy
+                </a>
+                <a href="#" className="text-white/70 hover:text-white text-xs transition-colors">
+                  Terms of Service
+                </a>
+                <a href="#" className="text-white/70 hover:text-white text-xs transition-colors">
+                  Cookie Policy
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }

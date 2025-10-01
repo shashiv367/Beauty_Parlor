@@ -1,6 +1,5 @@
 import React from 'react'
 import Header from '../header/Header'
-import Footer from '../footer/Footer'
 import Routers from '../routers/Routers'
 import { BrowserRouter as Router } from 'react-router-dom'
 function Layout() {
@@ -8,7 +7,6 @@ function Layout() {
     <Router>
         <Header/>
         <Routers/>
-        <Footer/>
     </Router>
   )
 }
